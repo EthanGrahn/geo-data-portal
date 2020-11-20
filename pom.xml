@@ -126,6 +126,14 @@
 			<url>https://artifacts.unidata.ucar.edu/content/repositories/unidata-releases</url>
 		</repository>
 		<repository>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+			<id>artifactory-geotools</id>
+			<name>artifactory-geotools</name>
+			<url>https://artifactory.wma.chs.usgs.gov:443/artifactory/geotools</url>
+		</repository>
+		<repository>
 			<id>n52-releases</id>
 			<name>52 North Releases</name>
 			<url>http://52north.org/maven/repo/releases</url>

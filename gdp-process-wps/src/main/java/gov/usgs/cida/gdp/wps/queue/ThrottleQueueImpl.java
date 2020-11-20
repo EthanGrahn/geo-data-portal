@@ -55,9 +55,9 @@ public class ThrottleQueueImpl implements ThrottleQueue {
 	private static final String THROTTLE_QUEUE_TABLE = "throttle_queue";
 	private static final String SELECT_RESPONSE_URL_STATEMENT = "SELECT response FROM results, response WHERE results.request_id = response.request_id and response.status = 'SUCCEEDED' and response.request_id = ?";
 	private static final String INSERT_STATUS_REQUEST_STATEMENT = "INSERT INTO " + THROTTLE_QUEUE_TABLE + "(REQUEST_ID, STATUS, ENQUEUED, DEQUEUED) VALUES (?, ?, ?, ?)";
-	private static final String UPDATE_STATUS_DEQUEUE_STATEMENT = "UPDATE " + THROTTLE_QUEUE_TABLE + " SET (STATUS, DEQUEUED) = (?, ?) WHERE REQUEST_ID = ?";
-	private static final String UPDATE_STATUS_ENQUEUE_STATEMENT = "UPDATE " + THROTTLE_QUEUE_TABLE + " SET (STATUS, ENQUEUED) = (?, ?) WHERE REQUEST_ID = ?";
-	private static final String UPDATE_STATUS_STATEMENT = "UPDATE " + THROTTLE_QUEUE_TABLE + " SET (STATUS) = (?) WHERE REQUEST_ID = ?";
+	private static final String UPDATE_STATUS_DEQUEUE_STATEMENT = "UPDATE " + THROTTLE_QUEUE_TABLE + " SET (STATUS, DEQUEUED) = ROW(?, ?) WHERE REQUEST_ID = ?";
+	private static final String UPDATE_STATUS_ENQUEUE_STATEMENT = "UPDATE " + THROTTLE_QUEUE_TABLE + " SET (STATUS, ENQUEUED) = ROW(?, ?) WHERE REQUEST_ID = ?";
+	private static final String UPDATE_STATUS_STATEMENT = "UPDATE " + THROTTLE_QUEUE_TABLE + " SET (STATUS) = ROW(?) WHERE REQUEST_ID = ?";
 	private static final String SELECT_DATA_SOURCES_STATEMENT = "SELECT INPUT_VALUE FROM INPUT WHERE INPUT_IDENTIFIER = 'DATASET_URI' AND REQUEST_ID = ?";
 	private static final String UPDATE_ONE_WORK_RETURNING = "UPDATE throttle_queue q SET STATUS = 'PREENQUEUE' FROM "
 			+ "(Select input.request_id, input_value FROM input input, throttle_queue throttle WHERE input.input_identifier = 'DATASET_URI' AND input.input_value NOT IN "
